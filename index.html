@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snooker Plus Leaderboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -36,6 +34,14 @@
             height: 35.7px;
             margin-bottom: 10px;
         }
+        input[type="text"] {
+            margin-top: 20px;
+            padding: 10px;
+            width: 500px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
         .player-card {
             background-color: #33363B;
             margin: 10px 0;
@@ -62,6 +68,14 @@
             text-align: left;
             flex-grow: 2;
         }
+        .progress-bar {
+            height: 10px;
+            width: 100%;
+            background-color: #444;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
         .progress-bar-inner {
             height: 100%;
             position: absolute;
@@ -76,23 +90,18 @@
         <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo">
         <h1>Leaderboard</h1>
     </header>
-    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control w-50 mx-auto mt-3">
-    <div id="playerContainer" class="mt-3">
+    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players...">
+    <div id="playerContainer">
         <!-- Content will be displayed here dynamically -->
     </div>
     <div id="recordData">
         <!-- Your existing HTML code here -->
+
+<!-- Add the following script tag to include Google API client -->
+<script src="https://apis.google.com/js/api.js"></script>
+
+<!-- Add the following script tag to include your JavaScript file -->
+<script src="datapull.js"></script>
     </div>
-
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
-    <!-- Google API client -->
-    <script src="https://apis.google.com/js/api.js"></script>
-
-    <!-- Your JavaScript file -->
-    <script src="datapull.js"></script>
 </body>
 </html>

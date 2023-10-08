@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snooker Plus Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #22252B;
@@ -14,8 +14,14 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
         header {
+            width: 100%;
             padding: 20px;
             box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
             text-align: center;
@@ -26,8 +32,7 @@
             font-size: 24px;
         }
         img {
-            width: 80%;
-            max-width: 270px;
+            width: 270px;
             height: auto;
             margin-bottom: 10px;
         }
@@ -36,35 +41,49 @@
             margin: 10px 0;
             padding: 15px;
             border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
             color: #B3B3B3;
         }
-        /* ... other styles ... */
+        .player-card[data-level="Yellow"] { --card-color: #FFEB3B; }
+        .player-card[data-level="Green"] { --card-color: #4CAF50; }
+        .player-card[data-level="Brown"] { --card-color: #795548; }
+        .player-card[data-level="Blue"] { --card-color: #2196F3; }
+        .player-card[data-level="Pink"] { --card-color: #E91E63; }
+        .player-card[data-level="Black"] { --card-color: #000000; }
+        .player-card[data-level="Red"] { --card-color: #F44336; }
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .player-name {
+            text-align: left;
+            flex-grow: 2;
+        }
+        .progress-bar-inner {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: var(--card-color);
+        }
     </style>
 </head>
 <body>
-    <header class="container-fluid">
-        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo" class="img-fluid mx-auto d-block">
+    <header>
+        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo">
         <h1>Leaderboard</h1>
     </header>
-    <div class="container">
-        <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control mt-3">
-        <div id="playerContainer" class="mt-3">
-            <!-- Content will be displayed here dynamically -->
-        </div>
-        <div id="recordData">
-            <!-- Your existing HTML code here -->
-        </div>
+    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control w-100 mx-auto mb-3" style="max-width: 500px;">
+    <div id="playerContainer" class="w-100 mx-auto" style="max-width: 500px;">
+        <!-- Content will be displayed here dynamically -->
     </div>
-
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
-    <!-- Google API client -->
+    <!-- Google API Client -->
     <script src="https://apis.google.com/js/api.js"></script>
-
-    <!-- Your JavaScript file -->
-    <script src="datapull.js"></script>
+    <!-- Your External JS -->
+    <script src="script.js"></script>
 </body>
 </html>

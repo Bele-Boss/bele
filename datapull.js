@@ -2,19 +2,18 @@
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const SHEET_NAME = 'Rank';
+
 // Load the Google Sheets API
 gapi.load('client', initClient);
+
 // Initialize the Google Sheets API client
 function initClient() {
     gapi.client.init({
-        console.log('one');
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function() {
         // Call the function to fetch data
-        console.log('two');
         fetchSheetData();
-    console.log('three');
     });
 }
 
@@ -31,23 +30,30 @@ function fetchSheetData() {
             // Process and display the data here
             const playerContainer = document.getElementById('playerContainer');
             playerContainer.innerHTML = ''; // Clear existing content
+
             values.forEach(function(row) {
                 const playerCard = document.createElement('div');
                 playerCard.classList.add('player-card');
                 playerCard.setAttribute('data-level', row[3]);
                 playerCard.setAttribute('data-name', row[1]);
+
                 const playerInfo = document.createElement('div');
                 playerInfo.classList.add('player-info');
+
                 const playerName = document.createElement('span');
                 playerName.classList.add('player-name');
                 playerName.textContent = row[0] + '. ' + row[1];
+
                 const playerCoins = document.createElement('span');
                 playerCoins.textContent = 'S+ Coins: ' + row[2];
+
                 const progressBar = document.createElement('div');
                 progressBar.classList.add('progress-bar');
+
                 const progressBarInner = document.createElement('div');
                 progressBarInner.classList.add('progress-bar-inner');
                 progressBarInner.style.width = (row[2] / 210) * 100 + '%';
+
                 progressBar.appendChild(progressBarInner);
                 playerInfo.appendChild(playerName);
                 playerInfo.appendChild(playerCoins);
@@ -62,6 +68,7 @@ function fetchSheetData() {
         console.error('Error fetching data:', response.result.error.message);
     });
 }
+
 // Function to search and filter data
 function searchTable() {
     var input, filter, cards, name, i;

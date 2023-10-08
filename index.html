@@ -92,33 +92,8 @@
     </header>
     <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players...">
     <div id="playerContainer">
-        <? for (var i = 0; i < data.length; i++) { ?>
-        <div class="player-card" data-level="<?= data[i][3] ?>" data-name="<?= data[i][1] ?>">
-            <div class="player-info">
-                <span class="player-name"><?= data[i][0] ?>. <?= data[i][1] ?></span>
-                <span>S+ Coins: <?= data[i][2] ?></span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-bar-inner" style="width: <?= (data[i][2] / 210) * 100 ?>%;"></div>
-            </div>
-        </div>
-        <? } ?>
+        <!-- Content will be displayed here dynamically -->
     </div>
-    <script>
-        function searchTable() {
-            var input, filter, cards, name, i;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            cards = document.getElementsByClassName("player-card");
-            for (i = 0; i < cards.length; i++) {
-                name = cards[i].getAttribute("data-name");
-                if (name.toUpperCase().indexOf(filter) > -1) {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-    </script>
+    <script src="datapull.js"></script>
 </body>
 </html>

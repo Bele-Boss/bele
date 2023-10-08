@@ -24,21 +24,18 @@ function fetchSheetData() {
         range: SHEET_NAME,
     }).then(function(response) {
         const values = response.result.values;
-        console.log('Here1');
-        console.log(values);
         if (values && values.length > 0) {
-            // Process and display the data here
             const playerContainer = document.getElementById('playerContainer');
             playerContainer.innerHTML = ''; // Clear existing content
 
             values.forEach(function(row) {
                 const playerCard = document.createElement('div');
-                playerCard.classList.add('player-card');
+                playerCard.classList.add('player-card', 'card', 'mb-3');
                 playerCard.setAttribute('data-level', row[3]);
                 playerCard.setAttribute('data-name', row[1]);
 
                 const playerInfo = document.createElement('div');
-                playerInfo.classList.add('player-info');
+                playerInfo.classList.add('card-body', 'player-info', 'd-flex', 'justify-content-between', 'align-items-center');
 
                 const playerName = document.createElement('span');
                 playerName.classList.add('player-name');
@@ -48,11 +45,15 @@ function fetchSheetData() {
                 playerCoins.textContent = 'S+ Coins: ' + row[2];
 
                 const progressBar = document.createElement('div');
-                progressBar.classList.add('progress-bar');
+                progressBar.classList.add('progress', 'mt-2');
 
                 const progressBarInner = document.createElement('div');
-                progressBarInner.classList.add('progress-bar-inner');
+                progressBarInner.classList.add('progress-bar');
                 progressBarInner.style.width = (row[2] / 210) * 100 + '%';
+                progressBarInner.setAttribute('role', 'progressbar');
+                progressBarInner.setAttribute('aria-valuenow', row[2]);
+                progressBarInner.setAttribute('aria-valuemin', '0');
+                progressBarInner.setAttribute('aria-valuemax', '210');
 
                 progressBar.appendChild(progressBarInner);
                 playerInfo.appendChild(playerName);

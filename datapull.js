@@ -9,11 +9,14 @@ gapi.load('client', initClient);
 // Initialize the Google Sheets API client
 function initClient() {
     gapi.client.init({
+        console.log('one');
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function() {
         // Call the function to fetch data
+        console.log('two');
         fetchSheetData();
+    console.log('three');
     });
 }
 

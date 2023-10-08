@@ -24,6 +24,8 @@ function fetchSheetData() {
         range: SHEET_NAME,
     }).then(function(response) {
         const values = response.result.values;
+        console.log('Here1');
+        console.log(values);
         if (values && values.length > 0) {
             // Process and display the data here
             const playerContainer = document.getElementById('playerContainer');

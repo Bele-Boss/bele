@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snooker Plus Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #22252B;
+            color: #FFFFFF;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        header {
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+            margin: 10px 0;
+            font-size: 24px;
+        }
+        img {
+            width: 270px;
+            height: 35.7px;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            margin-top: 20px;
+            padding: 10px;
+            width: 500px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .player-card {
+            background-color: #33363B;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            width: 500px;
+            position: relative;
+            color: #B3B3B3;
+        }
+        .player-card[data-level="Yellow"] { --card-color: #FFEB3B; }
+        .player-card[data-level="Green"] { --card-color: #4CAF50; }
+        .player-card[data-level="Brown"] { --card-color: #795548; }
+        .player-card[data-level="Blue"] { --card-color: #2196F3; }
+        .player-card[data-level="Pink"] { --card-color: #E91E63; }
+        .player-card[data-level="Black"] { --card-color: #000000; }
+        .player-card[data-level="Red"] { --card-color: #F44336; }
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .player-name {
+            text-align: left;
+            flex-grow: 2;
+        }
+        .progress-bar {
+            height: 10px;
+            width: 100%;
+            background-color: #444;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar-inner {
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: var(--card-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo">
+        <h1>Leaderboard</h1>
+    </header>
+    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players...">
+    <div id="playerContainer">
+        <? for (var i = 0; i < data.length; i++) { ?>
+        <div class="player-card" data-level="<?= data[i][3] ?>" data-name="<?= data[i][1] ?>">
+            <div class="player-info">
+                <span class="player-name"><?= data[i][0] ?>. <?= data[i][1] ?></span>
+                <span>S+ Coins: <?= data[i][2] ?></span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-bar-inner" style="width: <?= (data[i][2] / 210) * 100 ?>%;"></div>
+            </div>
+        </div>
+        <? } ?>
+    </div>
+    <script>
+        function searchTable() {
+            var input, filter, cards, name, i;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            cards = document.getElementsByClassName("player-card");
+            for (i = 0; i < cards.length; i++) {
+                name = cards[i].getAttribute("data-name");
+                if (name.toUpperCase().indexOf(filter) > -1) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

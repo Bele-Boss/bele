@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snooker Plus Leaderboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background-color: #22252B;
@@ -33,16 +33,23 @@
         }
         img {
             width: 270px;
-            height: auto;
+            height: 35.7px;
             margin-bottom: 10px;
+        }
+        input[type="text"] {
+            margin-top: 20px;
+            padding: 10px;
+            width: 500px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
         }
         .player-card {
             background-color: #33363B;
             margin: 10px 0;
             padding: 15px;
             border-radius: 8px;
-            width: 100%;
-            max-width: 500px;
+            width: 500px;
             position: relative;
             color: #B3B3B3;
         }
@@ -63,7 +70,7 @@
             text-align: left;
             flex-grow: 2;
         }
-        .progress-bar-custom {
+        .progress-bar {
             height: 10px;
             width: 100%;
             background-color: #444;
@@ -85,13 +92,18 @@
         <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo">
         <h1>Leaderboard</h1>
     </header>
-    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control w-100 mx-auto mb-3" style="max-width: 500px;">
-    <div id="playerContainer" class="w-100 mx-auto" style="max-width: 500px;">
+    <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players...">
+    <div id="playerContainer">
         <!-- Content will be displayed here dynamically -->
     </div>
-    <!-- Google API Client -->
-    <script src="https://apis.google.com/js/api.js"></script>
-    <!-- Your External JS -->
-    <script src="script.js"></script>
+    <div id="recordData">
+        <!-- Your existing HTML code here -->
+
+<!-- Add the following script tag to include Google API client -->
+<script src="https://apis.google.com/js/api.js"></script>
+
+<!-- Add the following script tag to include your JavaScript file -->
+<script src="datapull.js"></script>
+    </div>
 </body>
 </html>

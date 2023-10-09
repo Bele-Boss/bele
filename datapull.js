@@ -39,25 +39,46 @@ function createPlayerCard(player) {
     progressBar.className = 'progress-bar';
 
     // Determine the color of the progress bar based on coin count
-    if (coins < 10) {
-        progressBar.style.backgroundColor = '#F44336'; // Red
-    } else if (coins < 30) {
-        progressBar.style.backgroundColor = '#FFEB3B'; // Yellow
-    } else if (coins < 60) {
-        progressBar.style.backgroundColor = '#4CAF50'; // Green
-    } else if (coins < 100) {
-        progressBar.style.backgroundColor = '#795548'; // Brown
-    } else if (coins < 150) {
-        progressBar.style.backgroundColor = '#2196F3'; // Blue
-    } else if (coins < 210) {
-        progressBar.style.backgroundColor = '#E91E63'; // Pink
-    } else {
-        progressBar.style.backgroundColor = '#000000'; // Black
+    let progressBarColor = '#F44336'; // Default: Red
+
+    if (coins >= 10) {
+        progressBarColor = '#FFEB3B'; // Yellow
     }
 
-    // Calculate the width of the progress bar
+    if (coins >= 30) {
+        progressBarColor = '#4CAF50'; // Green
+    }
+
+    if (coins >= 60) {
+        progressBarColor = '#795548'; // Brown
+    }
+
+    if (coins >= 100) {
+        progressBarColor = '#2196F3'; // Blue
+    }
+
+    if (coins >= 150) {
+        progressBarColor = '#E91E63'; // Pink
+    }
+
+    if (coins >= 210) {
+        progressBarColor = '#000000'; // Black
+    }
+
+    progressBar.style.backgroundColor = progressBarColor;
+
+    // Calculate the width of the progress bar within its color segment
     const maxCoins = 210;
-    const progressBarWidth = (coins / maxCoins) * 100;
+    const colorMinCoins = [0, 10, 30, 60, 100, 150];
+    const colorMaxCoins = [10, 30, 60, 100, 150, 210];
+    let progressBarWidth = (coins - colorMinCoins[0]) / (colorMaxCoins[0] - colorMinCoins[0]) * 100;
+
+    for (let i = 1; i < colorMinCoins.length; i++) {
+        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
+            progressBarWidth = (coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i]) * 100;
+            break;
+        }
+    }
 
     progressBar.style.width = `${progressBarWidth}%`;
 

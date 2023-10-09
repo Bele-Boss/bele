@@ -1,4 +1,4 @@
-// Replace 'YOUR_API_KEY' with your Google API Key
+// Your API Key and Sheet ID
 const API_KEY = 'AIzaSyCfxg14LyZ1hrs18WHUuGOnSaJ_IJEtDQc';
 const SHEET_ID = '1Bcl1EVN-7mXUP7M1FL9TBB5v4O4AFxGTVB6PwqOn9ss';
 const SHEET_NAME = 'Rank';
@@ -12,7 +12,7 @@ function initClient() {
         apiKey: API_KEY,
         discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
     }).then(function() {
-        // Call the function to fetch data
+        // Fetch data
         fetchSheetData();
     });
 }
@@ -41,40 +41,30 @@ function createPlayerCard(player) {
     // Determine the color of the progress bar based on coin count
     let progressBarColor = '#F44336'; // Default: Red
 
-    if (coins > 10) {
+    if (coins >= 11 && coins <= 30) {
         progressBarColor = '#FFEB3B'; // Yellow
-    }
-
-    if (coins > 30) {
+    } else if (coins >= 31 && coins <= 60) {
         progressBarColor = '#4CAF50'; // Green
-    }
-
-    if (coins > 60) {
+    } else if (coins >= 61 && coins <= 100) {
         progressBarColor = '#795548'; // Brown
-    }
-
-    if (coins > 100) {
+    } else if (coins >= 101 && coins <= 150) {
         progressBarColor = '#2196F3'; // Blue
-    }
-
-    if (coins > 150) {
+    } else if (coins >= 151 && coins <= 210) {
         progressBarColor = '#E91E63'; // Pink
-    }
-
-    if (coins > 210) {
+    } else if (coins > 210) {
         progressBarColor = '#000000'; // Black
     }
 
     progressBar.style.backgroundColor = progressBarColor;
 
     // Calculate the width of the progress bar within its color segment
-    const colorMinCoins = [0, 10, 30, 60, 100, 150];
-    const colorMaxCoins = [10, 30, 60, 100, 150, 210];
+    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
+    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000]; // Added a high max for black
     let progressBarWidth = 0;
 
-    for (let i = 1; i < colorMinCoins.length; i++) {
+    for (let i = 0; i < colorMinCoins.length; i++) {
         if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-            progressBarWidth = ((coins - colorMinCoins[i - 1]) / (colorMaxCoins[i] - colorMinCoins[i - 1])) * 100;
+            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
             break;
         }
     }
@@ -83,7 +73,6 @@ function createPlayerCard(player) {
 
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);
-
     playerCard.appendChild(playerInfo);
     playerCard.appendChild(progressBar);
 
@@ -107,7 +96,6 @@ function fetchSheetData() {
     }).then(function(response) {
         const values = response.result.values;
         if (values && values.length > 0) {
-            // Process and display the data here
             const players = values.map((row, index) => ({
                 rank: index + 1,
                 name: row[1],

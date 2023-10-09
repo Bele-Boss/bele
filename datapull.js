@@ -125,17 +125,7 @@ function searchTable() {
         }
     }
 }
-// Calculate the width of the progress bar within its color segment
-const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
-const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000]; // Added a high max for black
-let progressBarWidth = 0;
 
-for (let i = 0; i < colorMinCoins.length; i++) {
-    if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
-        progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i])) * 100;
-        break;
-    }
-}
 
 
 // Call the initClient function to start fetching data

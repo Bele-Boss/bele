@@ -75,5 +75,10 @@ main {
     transition: width 0.3s ease;
     min-width: 10%; /* Ensuring the bar is at least slightly visible */
 }
+.player-winrate {
+    display: block;
+    font-size: 14px;
+    color: #FFEB3B; /* Yellow color for visibility, adjust as needed */
+}
 
 /* Additional CSS for color coding and animations can be added here */

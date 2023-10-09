@@ -5,7 +5,6 @@ body {
     margin: 0;
     padding: 0;
 }
-
 header {
     background-color: #33363B;
     padding: 20px;
@@ -15,66 +14,60 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
 header img {
     width: 180px;
 }
-
 h1 {
     color: #01AB7A;
     margin: 0;
     font-size: 24px;
 }
-
 main {
     padding: 20px;
 }
-
 .search-bar {
     margin-bottom: 20px;
 }
-
 .player-card {
     background-color: #33363B;
-    margin: 10px 0;
+    margin-bottom: 15px;
     padding: 15px;
     border-radius: 8px;
-    color: #B3B3B3;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
-
 .player-card:hover {
     transform: scale(1.02);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
-
 .player-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
-
-.player-coins, .player-winrate {
+.player-coins {
     color: #01AB7A;
-    font-size: 14px;
 }
-
 .progress-bar {
-    height: 12px;
+    height: 12px; /* Adjusted height */
     background-color: #444;
-    border-radius: 6px;
+    border-radius: 6px; /* Adjusted border-radius */
     overflow: hidden;
     position: relative;
+    margin-bottom: 5px; /* Added margin-bottom for spacing */
 }
-
 .progress-bar-inner {
     height: 100%;
     position: absolute;
-    left: 0;
     top: 0;
-    border-radius: 6px;
+    left: 0;
+    border-radius: 6px; /* Adjusted border-radius */
+    transition: width 0.3s ease;
+    min-width: 10%; /* Ensuring the bar is at least slightly visible */
+}
+.player-winrate {
+    display: block;
+    font-size: 14px;
+    color: #FFEB3B; /* Yellow color for visibility, adjust as needed */
 }
 
 /* Additional CSS for color coding and animations can be added here */

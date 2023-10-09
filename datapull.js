@@ -100,6 +100,28 @@ function searchTable() {
         }
     }
 }
+// ... (previous code)
+
+// Determine the color of the progress bar based on coin count
+let progressBarColor = '#F44336'; // Default: Red
+
+if (coins >= 11 && coins <= 30) {
+    progressBarColor = '#FFEB3B'; // Yellow
+} else if (coins >= 31 && coins <= 60) {
+    progressBarColor = '#4CAF50'; // Green
+} else if (coins >= 61 && coins <= 100) {
+    progressBarColor = '#795548'; // Brown
+} else if (coins >= 101 && coins <= 150) {
+    progressBarColor = '#2196F3'; // Blue
+} else if (coins >= 151 && coins <= 210) {
+    progressBarColor = '#E91E63'; // Pink
+} else if (coins > 210) {
+    progressBarColor = '#000000'; // Black
+}
+
+progressBar.style.backgroundColor = progressBarColor;
+
+// ... (rest of the code)
 
 // Call the initClient function to start fetching data
 initClient();

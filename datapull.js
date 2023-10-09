@@ -67,7 +67,7 @@ function createPlayerCard(player) {
 
         const progressBarInner = document.createElement('div');
         progressBarInner.className = 'progress-bar-inner';
-        progressBarInner.style.width = `${(coins / 210) * 100}%`;
+        progressBarInner.style.width = `${((coins % 30) / 30) * 100}%`; // Adjust progress bar width
 
         progressBar.appendChild(progressBarInner);
         playerCard.appendChild(progressBar);

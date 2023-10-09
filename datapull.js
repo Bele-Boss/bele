@@ -68,7 +68,7 @@ function createPlayerCard(player) {
     }
 
     if ([11, 31, 61, 101, 151, 211].includes(coins)) {
-        progressBarWidth = Math.max(progressBarWidth, 10); // Ensuring at least 10% width
+        progressBarWidth = Math.max(progressBarWidth, 4); // Ensuring at least 4% width
     }
 
     progressBar.style.width = `${progressBarWidth}%`;

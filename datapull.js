@@ -127,6 +127,31 @@ function searchTable() {
     }
 }
 
+// Function to create a player card element
+function createPlayerCard(player) {
+    // ... [rest of the code remains the same]
+
+    // Calculate the width of the progress bar within its color segment
+    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
+    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000]; // Added a high max for black
+    let progressBarWidth = 0;
+
+    for (let i = 0; i < colorMinCoins.length; i++) {
+        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
+            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
+            break;
+        }
+    }
+
+    // Ensure the bar is visible for certain coin values
+    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
+        progressBarWidth = Math.max(progressBarWidth, 10); // Ensuring at least 10% width
+    }
+
+    progressBar.style.width = `${progressBarWidth}%`;
+
+    // ... [rest of the code remains the same]
+}
 
 
 // Call the initClient function to start fetching data

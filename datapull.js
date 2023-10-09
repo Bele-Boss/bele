@@ -17,33 +17,6 @@ function initClient() {
     });
 }
 
-// Function to create a progress bar element
-function createProgressBar(value) {
-    // Define the maximum value for each level
-    const levelMaxValues = [10, 30, 60, 100, 150, 210];
-    
-    // Calculate the level of the player
-    let level = 1;
-    for (let i = 0; i < levelMaxValues.length; i++) {
-        if (value >= levelMaxValues[i]) {
-            level++;
-        }
-    }
-
-    // Calculate progress within the current level
-    const max = levelMaxValues[level - 1] || 1;
-    const min = levelMaxValues[level - 2] || 0;
-    const progress = ((value - min) / (max - min)) * 100;
-
-    // Create the progress bar element
-    const progressBar = document.createElement('div');
-    progressBar.className = 'progress-bar';
-    progressBar.innerHTML = `<div class="progress-bar-inner" style="width: ${progress}%;"></div>`;
-    progressBar.setAttribute('data-level', level);
-
-    return progressBar;
-}
-
 // Function to create a player card element
 function createPlayerCard(player) {
     const { rank, name, coins } = player;
@@ -62,7 +35,31 @@ function createPlayerCard(player) {
     playerCoins.className = 'player-coins';
     playerCoins.textContent = `S+ Coins: ${coins}`;
 
-    const progressBar = createProgressBar(coins);
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+
+    // Determine the color of the progress bar based on coin count
+    if (coins < 10) {
+        progressBar.style.backgroundColor = '#F44336'; // Red
+    } else if (coins < 30) {
+        progressBar.style.backgroundColor = '#FFEB3B'; // Yellow
+    } else if (coins < 60) {
+        progressBar.style.backgroundColor = '#4CAF50'; // Green
+    } else if (coins < 100) {
+        progressBar.style.backgroundColor = '#795548'; // Brown
+    } else if (coins < 150) {
+        progressBar.style.backgroundColor = '#2196F3'; // Blue
+    } else if (coins < 210) {
+        progressBar.style.backgroundColor = '#E91E63'; // Pink
+    } else {
+        progressBar.style.backgroundColor = '#000000'; // Black
+    }
+
+    // Calculate the width of the progress bar
+    const maxCoins = 210;
+    const progressBarWidth = (coins / maxCoins) * 100;
+
+    progressBar.style.width = `${progressBarWidth}%`;
 
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);

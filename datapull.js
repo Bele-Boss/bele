@@ -43,22 +43,22 @@ function createPlayerCard(player) {
 
     if (coins >= 210) {
         progressBarColor = '#000000'; // Black
-    } else if (coins >= 150) {
+    } else if (coins >= 151) {
         progressBarColor = '#E91E63'; // Pink
-    } else if (coins >= 100) {
+    } else if (coins >= 101) {
         progressBarColor = '#2196F3'; // Blue
-    } else if (coins >= 60) {
+    } else if (coins >= 61) {
         progressBarColor = '#795548'; // Brown
-    } else if (coins >= 30) {
+    } else if (coins >= 31) {
         progressBarColor = '#4CAF50'; // Green
-    } else if (coins >= 10) {
+    } else if (coins >= 11) {
         progressBarColor = '#FFEB3B'; // Yellow
     }
 
     progressBar.style.backgroundColor = progressBarColor;
 
     // Calculate the width of the progress bar within its color segment
-    const colorMinCoins = [0, 10, 30, 60, 100, 150];
+    const colorMinCoins = [0, 11, 31, 61, 101, 151];
     const colorMaxCoins = [10, 30, 60, 100, 150, 210];
     let progressBarWidth = 0;
 

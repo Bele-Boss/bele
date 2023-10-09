@@ -17,6 +17,48 @@ function initClient() {
     });
 }
 
+// Function to calculate progress within each level
+function calculateProgress(value, level) {
+    const levelThresholds = [10, 30, 60, 100, 150, 210];
+    const min = levelThresholds[level - 1] || 0;
+    const max = levelThresholds[level] || Number.MAX_VALUE;
+    return Math.min((value - min) / (max - min), 1);
+}
+
+// Function to create a progress bar element
+function createProgressBar(value, level) {
+    const progress = calculateProgress(value, level) * 100;
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+    progressBar.innerHTML = `<div class="progress-bar-inner" style="width: ${progress}%;"></div>`;
+    return progressBar;
+}
+
+// Function to create a player card element
+function createPlayerCard(player) {
+    const { rank, name, coins, level } = player;
+    const playerCard = document.createElement('div');
+    playerCard.className = 'player-card';
+    playerCard.setAttribute('data-level', level);
+    playerCard.innerHTML = `
+        <div class="player-info">
+            <span class="player-name">${rank}. ${name}</span>
+            <span class="player-coins">S+ Coins: ${coins}</span>
+        </div>
+    `;
+    playerCard.appendChild(createProgressBar(coins, level));
+    return playerCard;
+}
+
+// Function to display players
+function displayPlayers(players) {
+    const playerContainer = document.getElementById('playerContainer');
+    playerContainer.innerHTML = '';
+    players.forEach(player => {
+        playerContainer.appendChild(createPlayerCard(player));
+    });
+}
+
 // Function to fetch data from Google Sheets
 function fetchSheetData() {
     gapi.client.sheets.spreadsheets.values.get({
@@ -24,43 +66,15 @@ function fetchSheetData() {
         range: SHEET_NAME,
     }).then(function(response) {
         const values = response.result.values;
-        console.log('Here1');
-        console.log(values);
         if (values && values.length > 0) {
             // Process and display the data here
-            const playerContainer = document.getElementById('playerContainer');
-            playerContainer.innerHTML = ''; // Clear existing content
-
-            values.forEach(function(row) {
-                const playerCard = document.createElement('div');
-                playerCard.classList.add('player-card');
-                playerCard.setAttribute('data-level', row[3]);
-                playerCard.setAttribute('data-name', row[1]);
-
-                const playerInfo = document.createElement('div');
-                playerInfo.classList.add('player-info');
-
-                const playerName = document.createElement('span');
-                playerName.classList.add('player-name');
-                playerName.textContent = row[0] + '. ' + row[1];
-
-                const playerCoins = document.createElement('span');
-                playerCoins.textContent = 'S+ Coins: ' + row[2];
-
-                const progressBar = document.createElement('div');
-                progressBar.classList.add('progress-bar');
-
-                const progressBarInner = document.createElement('div');
-                progressBarInner.classList.add('progress-bar-inner');
-                progressBarInner.style.width = (row[2] / 210) * 100 + '%';
-
-                progressBar.appendChild(progressBarInner);
-                playerInfo.appendChild(playerName);
-                playerInfo.appendChild(playerCoins);
-                playerCard.appendChild(playerInfo);
-                playerCard.appendChild(progressBar);
-                playerContainer.appendChild(playerCard);
-            });
+            const players = values.map((row, index) => ({
+                rank: index + 1,
+                name: row[1],
+                coins: parseInt(row[2]),
+                level: row[3],
+            }));
+            displayPlayers(players);
         } else {
             console.log('No data found.');
         }
@@ -84,3 +98,6 @@ function searchTable() {
         }
     }
 }
+
+// Call the initClient function to start fetching data
+initClient();

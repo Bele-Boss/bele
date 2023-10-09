@@ -41,28 +41,18 @@ function createPlayerCard(player) {
     // Determine the color of the progress bar based on coin count
     let progressBarColor = '#F44336'; // Default: Red
 
-    if (coins >= 10) {
-        progressBarColor = '#FFEB3B'; // Yellow
-    }
-
-    if (coins >= 30) {
-        progressBarColor = '#4CAF50'; // Green
-    }
-
-    if (coins >= 60) {
-        progressBarColor = '#795548'; // Brown
-    }
-
-    if (coins >= 100) {
-        progressBarColor = '#2196F3'; // Blue
-    }
-
-    if (coins >= 150) {
-        progressBarColor = '#E91E63'; // Pink
-    }
-
     if (coins >= 210) {
         progressBarColor = '#000000'; // Black
+    } else if (coins >= 150) {
+        progressBarColor = '#E91E63'; // Pink
+    } else if (coins >= 100) {
+        progressBarColor = '#2196F3'; // Blue
+    } else if (coins >= 60) {
+        progressBarColor = '#795548'; // Brown
+    } else if (coins >= 30) {
+        progressBarColor = '#4CAF50'; // Green
+    } else if (coins >= 10) {
+        progressBarColor = '#FFEB3B'; // Yellow
     }
 
     progressBar.style.backgroundColor = progressBarColor;

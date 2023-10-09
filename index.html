@@ -2,121 +2,40 @@
 <html lang="en">
 
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snooker Plus Leaderboard</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #22252B;
-            color: #FFFFFF;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        header {
-            background-color: #33363B;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        h1 {
-            color: #01AB7A;
-            margin: 10px 0;
-            font-size: 24px;
-        }
-
-        img {
-            width: 180px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .search-bar {
-            margin: 20px 0;
-        }
-
-        .player-card {
-            background-color: #33363B;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            color: #B3B3B3;
-            transition: transform 0.2s;
-        }
-
-        .player-card:hover {
-            transform: scale(1.02);
-        }
-
-        .player-card[data-level="Yellow"] .progress-bar-inner {
-            background-color: #FFEB3B;
-        }
-
-        .player-card[data-level="Green"] .progress-bar-inner {
-            background-color: #4CAF50;
-        }
-
-        .player-card[data-level="Brown"] .progress-bar-inner {
-            background-color: #795548;
-        }
-
-        .player-card[data-level="Blue"] .progress-bar-inner {
-            background-color: #2196F3;
-        }
-
-        .player-card[data-level="Pink"] .progress-bar-inner {
-            background-color: #E91E63;
-        }
-
-        .player-card[data-level="Black"] .progress-bar-inner {
-            background-color: #000000;
-        }
-
-        .player-card[data-level="Red"] .progress-bar-inner {
-            background-color: #F44336;
-        }
-
-        .player-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .player-coins {
-            color: #01AB7A;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background-color: #444;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .progress-bar-inner {
-            height: 100%;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 text-md-start text-center">
-                <img src="https://img1.wsimg.com/isteam/ip/9e11a5db-9940-4d56-b773-7f8426617dc8/Frame%2012995%20(1).png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Snooker Plus Logo">
+            <div class="col-md-6 text-md-start text-center mb-3 mb-md-0">
+                <img src="your_logo_url" alt="Snooker Plus Logo" class="img-fluid" style="max-width: 180px;">
             </div>
             <div class="col-md-6 text-md-end text-center">
                 <h1>Leaderboard</h1>
             </div>
         </div>
     </header>
-    <div class="container search-bar">
+    <section class="container mt-4">
+        <div class="alert alert-success text-center" role="alert">
+            <h4 class="alert-heading">Win Rs. 2000 Cash Prize!</h4>
+            <p>The No. 1 player on 31st October will be awarded a Rs. 2000 cash prize and the top 8 will get a Snooker Plus T-shirt.</p>
+            <hr>
+            <p class="mb-0">Keep playing and keep earning points to win!</p>
+        </div>
+    </section>
+    <section class="container search-bar mb-4">
         <input type="text" id="searchInput" oninput="searchTable()" placeholder="Search for players..." class="form-control">
-    </div>
+    </section>
     <div id="playerContainer" class="container">
         <!-- Content will be displayed here dynamically -->
     </div>

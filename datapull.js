@@ -35,43 +35,58 @@ function createPlayerCard(player) {
     playerCoins.className = 'player-coins';
     playerCoins.textContent = `S+ Coins: ${coins}`;
 
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+
+    // Determine the color of the progress bar based on coin count
+    let progressBarColor = '#F44336'; // Default: Red
+
+    if (coins >= 10) {
+        progressBarColor = '#FFEB3B'; // Yellow
+    }
+
+    if (coins >= 30) {
+        progressBarColor = '#4CAF50'; // Green
+    }
+
+    if (coins >= 60) {
+        progressBarColor = '#795548'; // Brown
+    }
+
+    if (coins >= 100) {
+        progressBarColor = '#2196F3'; // Blue
+    }
+
+    if (coins >= 150) {
+        progressBarColor = '#E91E63'; // Pink
+    }
+
+    if (coins >= 210) {
+        progressBarColor = '#000000'; // Black
+    }
+
+    progressBar.style.backgroundColor = progressBarColor;
+
+    // Calculate the width of the progress bar within its color segment
+    const maxCoins = 210;
+    const colorMinCoins = [0, 10, 30, 60, 100, 150];
+    const colorMaxCoins = [10, 30, 60, 100, 150, 210];
+    let progressBarWidth = (coins - colorMinCoins[0]) / (colorMaxCoins[0] - colorMinCoins[0]) * 100;
+
+    for (let i = 1; i < colorMinCoins.length; i++) {
+        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
+            progressBarWidth = (coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i]) * 100;
+            break;
+        }
+    }
+
+    progressBar.style.width = `${progressBarWidth}%`;
+
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);
 
     playerCard.appendChild(playerInfo);
-
-    // Determine the color of the player card and whether to show a progress bar
-    let playerColor = 'Red'; // Default: Red
-    let showProgressBar = true;
-
-    if (coins >= 210) {
-        playerColor = 'Black'; // Legendary: Black
-        showProgressBar = false;
-    } else if (coins >= 150) {
-        playerColor = 'Pink'; // Pink
-    } else if (coins >= 100) {
-        playerColor = 'Blue'; // Blue
-    } else if (coins >= 60) {
-        playerColor = 'Brown'; // Brown
-    } else if (coins >= 30) {
-        playerColor = 'Green'; // Green
-    } else if (coins >= 10) {
-        playerColor = 'Yellow'; // Yellow
-    }
-
-    playerCard.classList.add(`player-color-${playerColor.toLowerCase()}`);
-
-    if (showProgressBar) {
-        const progressBar = document.createElement('div');
-        progressBar.className = 'progress-bar';
-
-        const progressBarInner = document.createElement('div');
-        progressBarInner.className = 'progress-bar-inner';
-        progressBarInner.style.width = `${((coins % 30) / 30) * 100}%`; // Adjust progress bar width
-
-        progressBar.appendChild(progressBarInner);
-        playerCard.appendChild(progressBar);
-    }
+    playerCard.appendChild(progressBar);
 
     return playerCard;
 }

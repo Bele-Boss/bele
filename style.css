@@ -2,12 +2,12 @@ body {
     background-color: #22252B;
     color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
-    margin: 0;
 }
 
 header {
     background-color: #33363B;
     padding: 20px 0;
+    text-align: center;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -17,9 +17,14 @@ h1 {
     font-size: 24px;
 }
 
-/* Additional CSS for better UI/UX */
-.alert {
-    border-radius: 10px;
+img {
+    width: 180px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.search-bar {
+    margin: 20px 0;
 }
 
 .player-card {
@@ -28,12 +33,59 @@ h1 {
     padding: 15px;
     border-radius: 8px;
     color: #B3B3B3;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
 }
 
 .player-card:hover {
     transform: scale(1.02);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* ... Rest of your CSS ... */
+.player-card[data-level="Yellow"] .progress-bar-inner {
+    background-color: #FFEB3B;
+}
+
+.player-card[data-level="Green"] .progress-bar-inner {
+    background-color: #4CAF50;
+}
+
+.player-card[data-level="Brown"] .progress-bar-inner {
+    background-color: #795548;
+}
+
+.player-card[data-level="Blue"] .progress-bar-inner {
+    background-color: #2196F3;
+}
+
+.player-card[data-level="Pink"] .progress-bar-inner {
+    background-color: #E91E63;
+}
+
+.player-card[data-level="Black"] .progress-bar-inner {
+    background-color: #000000;
+}
+
+.player-card[data-level="Red"] .progress-bar-inner {
+    background-color: #F44336;
+}
+
+.player-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.player-coins {
+    color: #01AB7A;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 100%;
+}

@@ -36,14 +36,17 @@ main {
 
 .player-card {
     background-color: #33363B;
-    margin-bottom: 15px;
+    margin: 10px 0;
     padding: 15px;
     border-radius: 8px;
-    transition: transform 0.2s;
+    color: #B3B3B3;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .player-card:hover {
     transform: scale(1.02);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .player-info {
@@ -53,32 +56,25 @@ main {
     margin-bottom: 10px;
 }
 
-.player-coins {
+.player-coins, .player-winrate {
     color: #01AB7A;
+    font-size: 14px;
 }
 
 .progress-bar {
-    height: 12px; /* Adjusted height */
+    height: 12px;
     background-color: #444;
-    border-radius: 6px; /* Adjusted border-radius */
+    border-radius: 6px;
     overflow: hidden;
     position: relative;
-    margin-bottom: 5px; /* Added margin-bottom for spacing */
 }
 
 .progress-bar-inner {
     height: 100%;
     position: absolute;
-    top: 0;
     left: 0;
-    border-radius: 6px; /* Adjusted border-radius */
-    transition: width 0.3s ease;
-    min-width: 10%; /* Ensuring the bar is at least slightly visible */
-}
-.player-winrate {
-    display: block;
-    font-size: 14px;
-    color: #FFEB3B; /* Yellow color for visibility, adjust as needed */
+    top: 0;
+    border-radius: 6px;
 }
 
 /* Additional CSS for color coding and animations can be added here */

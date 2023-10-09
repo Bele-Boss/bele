@@ -19,7 +19,7 @@ function initClient() {
 
 // Function to create a player card element
 function createPlayerCard(player) {
-    const { rank, name, coins, winRate } = player;
+    const { rank, name, coins } = player;
 
     const playerCard = document.createElement('div');
     playerCard.className = 'player-card';
@@ -35,18 +35,46 @@ function createPlayerCard(player) {
     playerCoins.className = 'player-coins';
     playerCoins.textContent = `S+ Coins: ${coins}`;
 
-    const playerWinRate = document.createElement('span'); // New element for win rate
-    playerWinRate.className = 'player-winrate';
-    playerWinRate.textContent = `Win Rate: ${winRate}%`;
-
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
 
-    // ... (rest of the code remains the same)
+    let progressBarColor = '#F44336'; // Default: Red
+
+    if (coins >= 11 && coins <= 30) {
+        progressBarColor = '#FFEB3B'; // Yellow
+    } else if (coins >= 31 && coins <= 60) {
+        progressBarColor = '#4CAF50'; // Green
+    } else if (coins >= 61 && coins <= 100) {
+        progressBarColor = '#795548'; // Brown
+    } else if (coins >= 101 && coins <= 150) {
+        progressBarColor = '#2196F3'; // Blue
+    } else if (coins >= 151 && coins <= 210) {
+        progressBarColor = '#E91E63'; // Pink
+    } else if (coins > 210) {
+        progressBarColor = '#000000'; // Black
+    }
+
+    progressBar.style.backgroundColor = progressBarColor;
+
+    const colorMinCoins = [0, 11, 31, 61, 101, 151, 211];
+    const colorMaxCoins = [10, 30, 60, 100, 150, 210, 1000];
+    let progressBarWidth = 0;
+
+    for (let i = 0; i < colorMinCoins.length; i++) {
+        if (coins >= colorMinCoins[i] && coins <= colorMaxCoins[i]) {
+            progressBarWidth = ((coins - colorMinCoins[i]) / (colorMaxCoins[i] - colorMinCoins[i] + 1)) * 100;
+            break;
+        }
+    }
+
+    if ([11, 31, 61, 101, 151, 211].includes(coins)) {
+        progressBarWidth = Math.max(progressBarWidth, 2); // Ensuring at least 2% width
+    }
+
+    progressBar.style.width = `${progressBarWidth}%`;
 
     playerInfo.appendChild(playerName);
     playerInfo.appendChild(playerCoins);
-    playerInfo.appendChild(playerWinRate); // Append win rate to player info
     playerCard.appendChild(playerInfo);
     playerCard.appendChild(progressBar);
 
@@ -74,7 +102,6 @@ function fetchSheetData() {
                 rank: index + 1,
                 name: row[1],
                 coins: parseInt(row[2]),
-                winRate: parseFloat(row[3]) // Assuming win rate is in the 4th column
             }));
             displayPlayers(players);
         } else {
@@ -100,28 +127,6 @@ function searchTable() {
         }
     }
 }
-// ... (previous code)
-
-// Determine the color of the progress bar based on coin count
-let progressBarColor = '#F44336'; // Default: Red
-
-if (coins >= 11 && coins <= 30) {
-    progressBarColor = '#FFEB3B'; // Yellow
-} else if (coins >= 31 && coins <= 60) {
-    progressBarColor = '#4CAF50'; // Green
-} else if (coins >= 61 && coins <= 100) {
-    progressBarColor = '#795548'; // Brown
-} else if (coins >= 101 && coins <= 150) {
-    progressBarColor = '#2196F3'; // Blue
-} else if (coins >= 151 && coins <= 210) {
-    progressBarColor = '#E91E63'; // Pink
-} else if (coins > 210) {
-    progressBarColor = '#000000'; // Black
-}
-
-progressBar.style.backgroundColor = progressBarColor;
-
-// ... (rest of the code)
 
 // Call the initClient function to start fetching data
 initClient();

@@ -17,36 +17,59 @@ function initClient() {
     });
 }
 
-// Function to calculate progress within each level
-function calculateProgress(value, level) {
-    const levelThresholds = [10, 30, 60, 100, 150, 210];
-    const min = levelThresholds[level - 1] || 0;
-    const max = levelThresholds[level] || Number.MAX_VALUE;
-    return Math.min((value - min) / (max - min), 1);
-}
-
 // Function to create a progress bar element
-function createProgressBar(value, level) {
-    const progress = calculateProgress(value, level) * 100;
+function createProgressBar(value) {
+    // Define the maximum value for each level
+    const levelMaxValues = [10, 30, 60, 100, 150, 210];
+    
+    // Calculate the level of the player
+    let level = 1;
+    for (let i = 0; i < levelMaxValues.length; i++) {
+        if (value >= levelMaxValues[i]) {
+            level++;
+        }
+    }
+
+    // Calculate progress within the current level
+    const max = levelMaxValues[level - 1] || 1;
+    const min = levelMaxValues[level - 2] || 0;
+    const progress = ((value - min) / (max - min)) * 100;
+
+    // Create the progress bar element
     const progressBar = document.createElement('div');
     progressBar.className = 'progress-bar';
     progressBar.innerHTML = `<div class="progress-bar-inner" style="width: ${progress}%;"></div>`;
+    progressBar.setAttribute('data-level', level);
+
     return progressBar;
 }
 
 // Function to create a player card element
 function createPlayerCard(player) {
-    const { rank, name, coins, level } = player;
+    const { rank, name, coins } = player;
+
     const playerCard = document.createElement('div');
     playerCard.className = 'player-card';
-    playerCard.setAttribute('data-level', level);
-    playerCard.innerHTML = `
-        <div class="player-info">
-            <span class="player-name">${rank}. ${name}</span>
-            <span class="player-coins">S+ Coins: ${coins}</span>
-        </div>
-    `;
-    playerCard.appendChild(createProgressBar(coins, level));
+
+    const playerInfo = document.createElement('div');
+    playerInfo.className = 'player-info';
+
+    const playerName = document.createElement('span');
+    playerName.className = 'player-name';
+    playerName.textContent = `${rank}. ${name}`;
+
+    const playerCoins = document.createElement('span');
+    playerCoins.className = 'player-coins';
+    playerCoins.textContent = `S+ Coins: ${coins}`;
+
+    const progressBar = createProgressBar(coins);
+
+    playerInfo.appendChild(playerName);
+    playerInfo.appendChild(playerCoins);
+
+    playerCard.appendChild(playerInfo);
+    playerCard.appendChild(progressBar);
+
     return playerCard;
 }
 
@@ -72,7 +95,6 @@ function fetchSheetData() {
                 rank: index + 1,
                 name: row[1],
                 coins: parseInt(row[2]),
-                level: row[3],
             }));
             displayPlayers(players);
         } else {
@@ -90,7 +112,7 @@ function searchTable() {
     filter = input.value.toUpperCase();
     cards = document.getElementsByClassName("player-card");
     for (i = 0; i < cards.length; i++) {
-        name = cards[i].getAttribute("data-name");
+        name = cards[i].getElementsByClassName("player-name")[0].textContent;
         if (name.toUpperCase().indexOf(filter) > -1) {
             cards[i].style.display = "";
         } else {
